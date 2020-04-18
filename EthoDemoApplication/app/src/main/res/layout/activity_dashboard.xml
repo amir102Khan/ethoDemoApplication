@@ -6,11 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.Dashboard">
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include android:id="@+id/toolbar"
+                    layout="@layout/layout_toolbar"/>
 
-        <TextView
-            android:text="dashboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                <FrameLayout
+                    android:id="@+id/frame"
+                    android:layout_below="@id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nvView"
+                android:layout_gravity="start"
+                app:menu="@menu/drawer_menu"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+
 </RelativeLayout>
 </layout>

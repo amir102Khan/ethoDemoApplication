@@ -25,13 +25,16 @@ public class SignUp extends BaseActivity implements View.OnClickListener, AuthLi
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up);
         loader =  (ConstraintLayout) binding.loader.getRoot();
+        setViewModel();
+        implementListener();
+    }
 
+    private void setViewModel(){
         SignUpViewModel signUpViewModel = ViewModelProviders.of(this).get(SignUpViewModel.class);
         binding.setSignUpViewModel(signUpViewModel);
         binding.setLifecycleOwner(this);
-
         signUpViewModel.setAuthListner(this);
-        implementListener();
+        signUpViewModel.setContext(mContext);
     }
 
     @Override
@@ -53,12 +56,18 @@ public class SignUp extends BaseActivity implements View.OnClickListener, AuthLi
     @Override
     public void onSuccess() {
         hideLoader();
+        sp.setBoolean(ISLOGIN,true);
         startActivity(new Intent(mContext,Dashboard.class));
     }
 
     @Override
     public void onError(String message) {
         hideLoader();
+        showToast(message);
+    }
+
+    @Override
+    public void onValidationError(String message) {
         showToast(message);
     }
 }

@@ -28,9 +28,6 @@ public class LoginModel {
         return mPassword;
     }
 
-    public boolean isEmailValid() {
-        return Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches();
-    }
 
 
     public boolean isPasswordLengthGreaterThan5() {

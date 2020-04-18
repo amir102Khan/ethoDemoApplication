@@ -24,12 +24,15 @@ public class Login extends BaseActivity implements View.OnClickListener, AuthLis
         loader =  (ConstraintLayout) binding.loader.getRoot();
 
         implementListener();
+        setViewModel();
+    }
 
+    private void setViewModel(){
         LoginViewModel loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         binding.setLoginViewModel(loginViewModel);
         binding.setLifecycleOwner(this);
-
         loginViewModel.setAuthListner(this);
+        loginViewModel.setContext(mContext);
     }
 
     @Override
@@ -52,11 +55,18 @@ public class Login extends BaseActivity implements View.OnClickListener, AuthLis
     @Override
     public void onSuccess() {
         hideLoader();
+        sp.setBoolean(ISLOGIN,true);
+        startActivity(new Intent(mContext,Dashboard.class));
     }
 
     @Override
     public void onError(String message) {
         hideLoader();
+        showToast(message);
+    }
+
+    @Override
+    public void onValidationError(String message) {
         showToast(message);
     }
 }

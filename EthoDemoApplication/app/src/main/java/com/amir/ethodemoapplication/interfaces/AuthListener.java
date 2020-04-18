@@ -6,4 +6,6 @@ public interface AuthListener {
     void onSuccess();
 
     void onError(String message);
+
+    void onValidationError(String message);
 }
