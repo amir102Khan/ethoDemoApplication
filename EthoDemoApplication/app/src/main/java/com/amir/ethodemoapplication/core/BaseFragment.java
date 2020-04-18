@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -22,6 +23,7 @@ public class BaseFragment extends Fragment {
     public String TAG = "Error";
     public LinearLayoutManager layoutManager;
     public SharedPref sp;
+    public ConstraintLayout loader;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,4 +63,13 @@ public class BaseFragment extends Fragment {
         ConnectivityManager conMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         return conMgr != null && (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected());
     }
+
+    public void showLoader() {
+        loader.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoader() {
+        loader.setVisibility(View.GONE);
+    }
+
 }

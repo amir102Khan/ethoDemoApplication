@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.amir.ethodemoapplication.interfaces.AuthListener;
+import com.amir.ethodemoapplication.interfaces.Constants;
 import com.amir.ethodemoapplication.model.LoginModel;
 import com.amir.ethodemoapplication.model.SignupModel;
+import com.amir.ethodemoapplication.model.UserModel;
 import com.amir.ethodemoapplication.util.Common;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -16,8 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUpViewModel extends ViewModel {
+public class SignUpViewModel extends ViewModel implements Constants {
     public MutableLiveData<String> email = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     public MutableLiveData<String> name = new MutableLiveData<>();
@@ -65,7 +69,7 @@ public class SignUpViewModel extends ViewModel {
                                 if (task.isSuccessful()){
                                     FirebaseUser firebaseUser = FirebaseAuth.
                                             getInstance().getCurrentUser();
-
+/*
                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                             .setDisplayName(signupModel.getmName()).build();
 
@@ -75,7 +79,18 @@ public class SignUpViewModel extends ViewModel {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     authListener.onSuccess();
                                                 }
-                                            });
+                                            });*/
+
+                                    DatabaseReference databaseReference = FirebaseDatabase
+                                            .getInstance().getReference(USER);
+
+                                    UserModel userModel = new UserModel(signupModel.getmName(),
+                                            signupModel.getmEmail(),firebaseUser.getUid(),"","");
+
+
+                                    databaseReference.child(firebaseUser.getUid()).setValue(userModel);
+                                    authListener.onSuccess();
+
                                 }
                                 else {
                                     authListener.onError("Sign Up failed");
