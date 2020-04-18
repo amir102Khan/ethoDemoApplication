@@ -1,7 +1,6 @@
 package com.amir.ethodemoapplication.core;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.amir.ethodemoapplication.util.SharedPref;

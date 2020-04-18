@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.amir.ethodemoapplication.R;
+import com.amir.ethodemoapplication.core.BaseFragment;
 
 
-
-public class Ride extends Fragment {
+public class Ride extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

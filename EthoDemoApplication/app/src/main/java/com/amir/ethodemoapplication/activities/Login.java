@@ -57,6 +57,7 @@ public class Login extends BaseActivity implements View.OnClickListener, AuthLis
         hideLoader();
         sp.setBoolean(ISLOGIN,true);
         startActivity(new Intent(mContext,Dashboard.class));
+        finish();
     }
 
     @Override

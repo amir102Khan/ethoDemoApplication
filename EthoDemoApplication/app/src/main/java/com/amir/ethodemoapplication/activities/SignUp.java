@@ -58,6 +58,7 @@ public class SignUp extends BaseActivity implements View.OnClickListener, AuthLi
         hideLoader();
         sp.setBoolean(ISLOGIN,true);
         startActivity(new Intent(mContext,Dashboard.class));
+        finish();
     }
 
     @Override

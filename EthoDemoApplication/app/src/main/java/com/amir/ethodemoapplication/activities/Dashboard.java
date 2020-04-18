@@ -18,6 +18,7 @@ import com.amir.ethodemoapplication.core.BaseActivity;
 import com.amir.ethodemoapplication.databinding.ActivityDashboardBinding;
 import com.amir.ethodemoapplication.fragments.Profile;
 import com.amir.ethodemoapplication.fragments.Ride;
+import com.amir.ethodemoapplication.util.Common;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +34,7 @@ public class Dashboard extends BaseActivity {
         setUpToggle();
         implementListener();
         switchToFragment(new Profile());
+        Common.setToolbarWithBackAndTitle(mContext,"My Profile",false,0);
     }
 
     private void implementListener(){
@@ -87,10 +89,12 @@ public class Dashboard extends BaseActivity {
                 break;
 
             case R.id.nav_my_ride:
+                Common.setToolbarWithBackAndTitle(mContext,"My Ride",false,0);
                 switchToFragment(new Ride());
                 break;
 
             case R.id.nav_my_profile:
+                Common.setToolbarWithBackAndTitle(mContext,"My Profile",false,0);
                 switchToFragment(new Profile());
                 break;
         }
