@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.amir.ethodemoapplication.viewmodel.LoginViewModel" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,6 +41,7 @@
 
 
             <EditText
+                android:text="@={loginViewModel.email}"
                 android:id="@+id/edEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,6 +58,7 @@
 
 
             <EditText
+                android:text="@={loginViewModel.password}"
                 android:id="@+id/edPass"
                 android:maxLength="30"
                 android:textSize="@dimen/_14sdp"
@@ -66,6 +74,7 @@
                 android:textColor="@color/black" />
 
             <Button
+                android:onClick="@{()-> loginViewModel.onLoginClicked()}"
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,6 +110,11 @@
             android:background="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+
+        <include android:visibility="gone"
+            android:id="@+id/loader"
+            layout="@layout/layout_loader"/>
 
     </RelativeLayout>
 </layout>

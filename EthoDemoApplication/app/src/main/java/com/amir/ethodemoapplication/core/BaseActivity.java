@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.amir.ethodemoapplication.R;
@@ -25,6 +26,8 @@ public class BaseActivity extends AppCompatActivity implements Constants {
     public Activity mContext;
     public String TAG = "Error";
     public LinearLayoutManager layoutManager;
+    public ConstraintLayout loader;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +66,14 @@ public class BaseActivity extends AppCompatActivity implements Constants {
 
     public void back(){
         overridePendingTransition(R.anim.stays, R.anim.slide_out_to_right);
+    }
+
+    public void showLoader() {
+        loader.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoader() {
+        loader.setVisibility(View.GONE);
     }
 
     @Override
