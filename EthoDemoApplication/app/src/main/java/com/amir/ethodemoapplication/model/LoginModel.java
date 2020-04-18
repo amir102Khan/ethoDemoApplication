@@ -1,7 +1,5 @@
 package com.amir.ethodemoapplication.model;
 
-import android.util.Patterns;
-
 public class LoginModel {
     private String mEmail;
     private String mPassword;
@@ -27,7 +25,6 @@ public class LoginModel {
         }
         return mPassword;
     }
-
 
 
     public boolean isPasswordLengthGreaterThan5() {

@@ -56,13 +56,6 @@ public class BaseFragment extends Fragment {
             inputMethodManager.hideSoftInputFromWindow(mContext.getCurrentFocus().getWindowToken(), 0);
     }
 
-    public void showSnackBar(View v, String message) {
-        Snackbar.make(v, message, Snackbar.LENGTH_SHORT).show();
-    }
-    public boolean checkInternetConnection() {
-        ConnectivityManager conMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return conMgr != null && (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected());
-    }
 
     public void showLoader() {
         loader.setVisibility(View.VISIBLE);

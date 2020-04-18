@@ -45,27 +45,21 @@ public class BaseActivity extends AppCompatActivity implements Constants {
         layoutManager = new LinearLayoutManager(getApplicationContext());
     }
 
+    /**
+     * show the toast message
+     * @param message
+     */
     public void showToast(String message) {
         Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
     }
 
-    public void showSnackBar(View v, String message) {
-        Snackbar.make(v, message, Snackbar.LENGTH_SHORT).show();
-    }
-
-    public boolean checkInternetConnection() {
-        ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return conMgr != null && (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected());
-    }
-
+    /**
+     * hide the soft keyboard
+     */
     public void hideKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) mContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null && mContext.getCurrentFocus() != null)
             inputMethodManager.hideSoftInputFromWindow(mContext.getCurrentFocus().getWindowToken(), 0);
-    }
-
-    public void back(){
-        overridePendingTransition(R.anim.stays, R.anim.slide_out_to_right);
     }
 
     public void showLoader() {

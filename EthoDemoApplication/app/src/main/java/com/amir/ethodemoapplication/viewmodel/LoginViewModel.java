@@ -3,12 +3,9 @@ package com.amir.ethodemoapplication.viewmodel;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.amir.ethodemoapplication.activities.Login;
-import com.amir.ethodemoapplication.core.BaseActivity;
 import com.amir.ethodemoapplication.interfaces.AuthListener;
 import com.amir.ethodemoapplication.model.LoginModel;
 import com.amir.ethodemoapplication.util.Common;
@@ -24,43 +21,40 @@ public class LoginViewModel extends ViewModel {
     private AuthListener authListener;
     private Context context;
 
-    public void setContext(Context context){
+    public void setContext(Context context) {
         this.context = context;
     }
 
-    public void setAuthListner(AuthListener authListener){
+    public void setAuthListner(AuthListener authListener) {
         this.authListener = authListener;
     }
 
+    /**
+     * method called when on login button will be clicked
+     */
     public void onLoginClicked() {
-        LoginModel loginModel = new LoginModel(email.getValue(),password.getValue());
-        if (!Common.isValidEmail(loginModel.getEmail())){
+        LoginModel loginModel = new LoginModel(email.getValue(), password.getValue());
+        if (!Common.isValidEmail(loginModel.getEmail())) {
             authListener.onValidationError("Email is not valid");
-        }
-        else if (!Common.validateEditText(loginModel.getEmail())){
+        } else if (!Common.validateEditText(loginModel.getEmail())) {
             authListener.onValidationError("Email is empty");
-        }
-        else if (!Common.validateEditText(loginModel.getPassword())){
+        } else if (!Common.validateEditText(loginModel.getPassword())) {
             authListener.onValidationError("Password is empty");
-        }
-        else if (!loginModel.isPasswordLengthGreaterThan5()){
+        } else if (!loginModel.isPasswordLengthGreaterThan5()) {
             authListener.onValidationError("Password is too short");
-        }
-        else {
-            if (!Common.checkInternetConnection(context)){
+        } else {
+            if (!Common.checkInternetConnection(context)) {
                 authListener.onValidationError("check your internet connectivity");
-            }
-            else {
+            } else {
                 authListener.onStarting();
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(loginModel.getEmail(),loginModel.getPassword())
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(loginModel.getEmail(), loginModel.getPassword())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     authListener.onSuccess();
-                                }
-                                else {
+                                } else {
                                     authListener.onError("Login failed");
                                 }
 

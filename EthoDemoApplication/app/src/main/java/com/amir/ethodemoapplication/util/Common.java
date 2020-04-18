@@ -14,19 +14,41 @@ import com.amir.ethodemoapplication.R;
 
 public class Common {
 
+    /**
+     * method to check string is empty or not
+     * @param text
+     * @return
+     */
     public static boolean validateEditText(String text) {
         return !TextUtils.isEmpty(text) && text.trim().length() > 0;
     }
 
+    /**
+     * method to check email is valid or not
+     * @param email
+     * @return
+     */
     public static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    /**
+     * method to check internet connectivity
+     * @param context
+     * @return
+     */
     public static boolean checkInternetConnection(Context context) {
         ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return conMgr != null && (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected());
     }
 
+    /**
+     * method to set the toolbar with back icon and title
+     * @param ctx
+     * @param title
+     * @param value
+     * @param backResource
+     */
     public static void setToolbarWithBackAndTitle(final Context ctx, String title, Boolean value, int backResource) {
         Toolbar toolbar = ((AppCompatActivity) ctx).findViewById(R.id.toolbar);
         ((AppCompatActivity) ctx).setSupportActionBar(toolbar);

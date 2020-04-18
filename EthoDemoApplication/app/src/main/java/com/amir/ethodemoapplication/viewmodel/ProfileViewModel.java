@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.amir.ethodemoapplication.interfaces.AuthListener;
 import com.amir.ethodemoapplication.interfaces.Constants;
-import com.amir.ethodemoapplication.interfaces.DataListener;
 import com.amir.ethodemoapplication.model.UserModel;
+import com.amir.ethodemoapplication.util.Common;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,55 +53,73 @@ public class ProfileViewModel extends ViewModel implements Constants {
         return userMutableLiveData;
     }
 
+    /**
+     * method to load data from firebase
+     */
 
     private void loadData() {
-        dataListener.onStarting();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                    userMutableLiveData.setValue(userModel);
+
+        if (!Common.checkInternetConnection(context)) {
+            dataListener.onError("check your internet connectivity");
+        } else {
+            dataListener.onStarting();
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                        userMutableLiveData.setValue(userModel);
+                    }
+                    dataListener.onSuccess();
                 }
-                dataListener.onSuccess();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                dataListener.onError(databaseError.getMessage());
-            }
-        });
-
-/*
-        if (!Common.checkInternetConnection(context)){
-
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    dataListener.onError(databaseError.getMessage());
+                }
+            });
         }
-        else {
-            dataListener.noInternet("check your internet connectivity");
-        }
-*/
     }
 
+    /**
+     * method called when update profile button is clicked
+     */
     public void onUpdateProfile() {
-        dataListener.onStarting();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserModel userModel = new UserModel(name.getValue(),
-                        email.getValue(),
-                        firebaseUser.getUid(),
-                        phone.getValue(),
-                        bike.getValue());
+        final UserModel userModel = new UserModel(name.getValue(),
+                email.getValue(),
+                firebaseUser.getUid(),
+                phone.getValue(),
+                bike.getValue());
 
-                databaseReference.setValue(userModel);
+        if (!Common.validateEditText(userModel.getName())) {
+            dataListener.onValidationError("Name is empty");
+        } else if (!Common.validateEditText(userModel.getPhone())) {
+            dataListener.onValidationError("Mobile number is empty");
+        } else if (userModel.getPhone().length() < 10) {
+            dataListener.onValidationError("Enter a valid mobile number");
+        } else if (!Common.validateEditText(userModel.getBike())) {
+            dataListener.onValidationError("Bike name is empty");
+        } else {
+            if (!Common.checkInternetConnection(context)) {
+                dataListener.onValidationError("Bike name is empty");
+            } else {
+                dataListener.onStarting();
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                dataListener.onSuccess();
+                        databaseReference.setValue(userModel);
+
+                        dataListener.onSuccess();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        dataListener.onError(databaseError.getMessage());
+                    }
+                });
             }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                dataListener.onError(databaseError.getMessage());
-            }
-        });
     }
 }

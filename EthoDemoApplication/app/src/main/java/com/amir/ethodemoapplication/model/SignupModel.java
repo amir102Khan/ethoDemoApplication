@@ -1,15 +1,11 @@
 package com.amir.ethodemoapplication.model;
 
-import android.util.Patterns;
-
-import com.amir.ethodemoapplication.activities.SignUp;
-
 public class SignupModel {
     private String mEmail;
     private String mPassword;
     private String mName;
 
-    public SignupModel(String mName,String mEmail, String mPassword){
+    public SignupModel(String mName, String mEmail, String mPassword) {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mPassword = mPassword;
