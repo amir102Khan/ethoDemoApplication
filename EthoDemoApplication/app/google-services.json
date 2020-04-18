@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "416365274064",
+    "firebase_url": "https://ethodemoapplication.firebaseio.com",
+    "project_id": "ethodemoapplication",
+    "storage_bucket": "ethodemoapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416365274064:android:428e2ea17a182ad0370fd5",
+        "android_client_info": {
+          "package_name": "com.amir.ethodemoapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416365274064-8v877ol57u4gd1ntcqori6lovu48vtik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amir.ethodemoapplication",
+            "certificate_hash": "21452c2e7bb3682fa8b1ecb3223c0cb08e9503a0"
+          }
+        },
+        {
+          "client_id": "416365274064-7v3qknqasrntb9kin08aqjdls0lhk7sl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmrY6sOF0nVSYPHCUCWq7G4DqJsC2fc4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416365274064-7v3qknqasrntb9kin08aqjdls0lhk7sl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
